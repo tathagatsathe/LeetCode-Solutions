@@ -7,12 +7,11 @@ class Solution:
         for i in range(1,len(s)):
             if(d[s[i]]<d[s[i-1]]):
                 ans+=temp
-                temp=d[s[i]]
+                temp=0
             elif(d[s[i]]>d[s[i-1]]):
                 ans-=temp
-                temp=d[s[i]]
-            else:
-                temp+=d[s[i]]
+                temp=0
+            temp+=d[s[i]]
 
         ans+=temp
 
