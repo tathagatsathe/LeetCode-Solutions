@@ -21,13 +21,11 @@ class Solution:
             else:
                 return -1
 
-        ans = l+1
+        ans = -1
         for k in range(1,7):
             if(t[k]+b[k]==l):
                 mn = min(t[k],b[k])
-                if(mn<ans):
+                if(mn<ans or ans==-1):
                     ans = mn
 
-        if(ans==l+1):
-            ans=-1
         return ans
