@@ -10,8 +10,6 @@ class Solution:
             else:
                 j-=1
             temp = min(height[i], height[j])*(j-i)
-            # print('ans: ',ans, 'i: ',i, 'j: ',j, height[i], height[j])
-            # print('_______________________________________')
             if(temp>ans):
                 ans = temp
 
