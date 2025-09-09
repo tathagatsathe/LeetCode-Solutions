@@ -1,7 +1,6 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        s = set()
-
+        
         def intSquare(n):
             s = 0
             while(n):
@@ -10,18 +9,17 @@ class Solution:
                 s+= t**2
             return s
 
-        
         if(n==1):
             return True
 
-        while(n!=1 and n not in s):
-            s.add(n)
-            n = intSquare(n)
-            if(n==1):
-                return True
+        slow, fast = n, intSquare(n)
+
+        while(fast!=1 and slow!=fast):
+            slow = intSquare(slow)
+            fast = intSquare(intSquare(fast))
 
 
-        return False
+        return fast==1
             
 
         
