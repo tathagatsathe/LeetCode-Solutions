@@ -2,6 +2,7 @@ class Solution:
     def compress(self, chars: List[str]) -> int:
         i, j, n = 0, 0, len(chars)
         c = 0
+        
         def intToArr(n):
             s = []
             while(n):
@@ -36,29 +37,5 @@ class Solution:
                 else:
                     i+=1
                     c=0
-
-
-        
-
-        
-        # while(i<n):
-        #     if(j<n and chars[i]==chars[j]):
-        #         if(c==1):
-        #             i+=1
-        #             j+=1
-        #         else:
-        #             chars.pop(j)
-        #             n-=1
-        #         c+=1
-        #     else:
-        #         if(c!=1):
-        #             chars[i] = str(c)
-        #         i+=1
-        #         j+=1
-        #         c=1
-        
-        # s = "".join(chars)
-        # print('s: ',s)
-        # chars = s
 
         return len(chars)
