@@ -2,7 +2,7 @@ class Solution:
     def compress(self, chars: List[str]) -> int:
         i, j, n = 0, 0, len(chars)
         c = 0
-        
+
         def intToArr(n):
             s = []
             while(n):
@@ -10,9 +10,6 @@ class Solution:
                 n//=10
 
             return s[::-1]
-
-        if(n==1):
-            return n
 
         while(i<n):
             if(j<n and chars[i]==chars[j]):
