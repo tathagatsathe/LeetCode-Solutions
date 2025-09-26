@@ -14,12 +14,8 @@ class Solution:
             if(node == None):
                 return False
 
-            print('node: ',node.val)
-
             l1 = lca(node.left,p,q)
             l2 = lca(node.right,p,q)
-
-            print('l1: ',l1, ' l2: ',l2, ' node: ', node.val)
 
             if type(l1) != bool:
                 return l1
@@ -38,8 +34,5 @@ class Solution:
             return False
 
         ans = lca(root,p,q)
-
-        print('ans: ',ans)
-
 
         return ans
