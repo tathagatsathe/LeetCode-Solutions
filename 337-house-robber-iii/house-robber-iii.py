@@ -17,25 +17,7 @@ class Solution:
             rb = l[1] + r[1] + node.val
             nrb = max(l) + max(r)
 
-
             return [rb, nrb]
 
-            # d0 = l[1] + r[1]
-            # d1 = l[1] + r[1] + node.val
-            # d2 = l[1] + r[0]
-            # d3 = l[0] + r[1]
-            # d4 = l[0] + r[0]
-
-            # temp = [d1, d4]
-            # if d2>d1 and d2>d3 and d2>d4:
-            #     temp = [d1, d2]
-            # elif d3>d1 and d3>d2 and d3>d4:
-            #     temp = [d1, d3]
-            # elif d0>d4:
-            #     temp[1] = d0
-
-            # return temp
-
-        
         return max(rob_f(root))
         
