@@ -27,7 +27,7 @@ class Solution:
 
         if len(queue) == 0:
             return -1
-
+        mx = 1
         while queue:
             for _ in range(len(queue)):
                 node = queue.popleft()
@@ -44,6 +44,9 @@ class Solution:
                         else:                          
                             dp[ad][j] = max(dp[node][j], dp[ad][j])
 
+                        if dp[ad][j] > mx:
+                            mx = dp[ad][j]
+
                     indegree[ad]-=1
                     visited[ad] = 1
                     if indegree[ad] == 0:
@@ -51,14 +54,5 @@ class Solution:
 
         if sum(indegree)>0:
             return -1
-        mx = 0
-        idx = 0
-
-        for i in range(n):
-            for j in range(no_of_colors):
-                if dp[i][j]>mx:
-                    mx = dp[i][j]
-                    idx = j
-
 
         return mx
