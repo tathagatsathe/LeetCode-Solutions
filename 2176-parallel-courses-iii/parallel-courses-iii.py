@@ -9,17 +9,13 @@ class Solution:
             adj[rel[0]-1].append(rel[1]-1)
             indegree[rel[1]-1]+=1
 
-        # print('adj: ',adj)
-        # print('indegree: ',indegree)
+
         queue = deque()
 
         for i in range(n):
             if indegree[i] == 0:
                 queue.append(i)
                 dp[i] = time[i]
-
-        # print('queue: ',queue)
-        # print('dp: ',dp)
 
         while queue:
             for _ in range(len(queue)):
@@ -33,9 +29,5 @@ class Solution:
                     if indegree[ad] == 0:
                         queue.append(ad)
                     visited[ad] = 1
-
-            # print('dpp: ',dp)
-
-        # print(dp)
 
         return max(dp)
