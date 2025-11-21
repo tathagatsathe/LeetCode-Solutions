@@ -14,7 +14,6 @@ class Solution:
         count = 0
         while h:
             dist, node = heapq.heappop(h)
-            print('node: ', node, ' dist: ',dist)
             if visited[node] == True:
                 continue
             visited[node] = True
@@ -22,17 +21,10 @@ class Solution:
             if dist>ans:
                 ans = dist
 
-            # if count >=n:
-            #     break
             for i in range(1,n+1):
                 if adj[node][i]!=None and visited[i]==False:
                     heapq.heappush(h, (dist+adj[node][i], i))
 
-        print(adj)
-        print(h)
-        print(count)
-        print(visited)
-        print(ans)
         if visited[1:].count(False)>0:
             return -1
 
