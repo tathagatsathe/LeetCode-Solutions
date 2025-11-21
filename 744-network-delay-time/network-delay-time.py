@@ -26,7 +26,6 @@ class Solution:
             for (ad_dist, ad) in graph[node]:
                 heapq.heappush(h, (dist+ad_dist, ad))
 
-        print('count: ',count)
         if count!=n:
             return -1
 
