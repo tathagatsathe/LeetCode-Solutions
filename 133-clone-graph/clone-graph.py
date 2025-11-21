@@ -16,7 +16,7 @@ class Solution:
                 return 
             if node.val in visited:
                 return visited[node.val]
-            # print(node.val)
+
             newNode = Node(node.val)
             temp = []
             visited[newNode.val] = newNode
@@ -25,12 +25,8 @@ class Solution:
                 if nei != None and nei not in newNode.neighbors:
                     newNode.neighbors.append(nei)
 
-            # for neighbor in newNode.neighbors:
-            #     print('node: ',newNode.val, 'neighbors: ', neighbor.val)
-            #     neighbor.neighbors.append(newNode)
 
             return newNode
-
 
         ans = dfs(node)
 
