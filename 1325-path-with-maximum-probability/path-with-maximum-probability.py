@@ -12,12 +12,10 @@ class Solution:
         h = []
 
         heapq.heappush(h, (-1, start_node))
-        ans = 0
         while h:
             max_prob, node = heapq.heappop(h)
             if node == end_node:
-                if max_prob*-1>ans:
-                    ans = -1 * max_prob
+                return -max_prob
             if visited[node] == True:
                 continue
             visited[node] = True
@@ -25,4 +23,4 @@ class Solution:
                 if visited[g[0]] == False:
                     heapq.heappush(h, (max_prob*g[1], g[0]))
 
-        return ans
+        return 0
