@@ -15,9 +15,6 @@ class Solution:
         ans = 0
         while h:
             max_prob, node = heapq.heappop(h)
-            # print(h)
-            # print('node: ', node)
-            # print('max_prob: ',max_prob)
             if node == end_node:
                 if max_prob*-1>ans:
                     ans = -1 * max_prob
@@ -27,7 +24,5 @@ class Solution:
             for g in grid[node]:
                 if visited[g[0]] == False:
                     heapq.heappush(h, (max_prob*g[1], g[0]))
-
-        # print(grid)
 
         return ans
