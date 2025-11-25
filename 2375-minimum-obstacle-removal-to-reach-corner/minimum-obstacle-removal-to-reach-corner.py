@@ -9,7 +9,7 @@ class Solution:
             directions = [(-1,0),(0, -1),(1,0),(0,1)]
             vertices = []
             for x, y in directions:
-                if x+i>=0 and y+j>=0 and x+i<m and y+j<n:
+                if x+i>=0 and y+j>=0 and x+i<m and y+j<n and visited[x+i][y+j]==False:
                     vertices.append((x+i, y+j))
 
             return vertices
@@ -28,6 +28,7 @@ class Solution:
             vertices = getValidVertices(x, y)
 
             dp[x][y] = obstacles
+            visited[x][y] = True
 
             # print('x: ',x, ' y: ',y)
             for i, j in vertices:
