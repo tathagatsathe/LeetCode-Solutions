@@ -1,5 +1,5 @@
 import heapq
-
+from collections import deque
 class Solution:
     def minimumObstacles(self, grid: List[List[int]]) -> int:
         m = len(grid)
@@ -14,27 +14,27 @@ class Solution:
 
             return vertices
 
-        dp = [[float("inf")]*n for _ in range(m)]
         visited = [[False]*n for _ in range(m)]
-        h = []
-        heapq.heappush(h, (grid[0][0], 0, 0))
-        # print('h: ',h)
+        cost = grid[0][0]
+        h = deque()
+        h.append((0, 0,0))
+        visited[0][0] = True
         while h:
-            obstacles, x, y = heapq.heappop(h)
+            obstacles, x, y = h.popleft()
 
-            if obstacles >= dp[x][y]:
-                continue
+            if x==m-1 and y==n-1:
+                return obstacles
 
             vertices = getValidVertices(x, y)
 
-            dp[x][y] = obstacles
-            visited[x][y] = True
-
             # print('x: ',x, ' y: ',y)
             for i, j in vertices:
-                heapq.heappush(h, (obstacles + grid[i][j], i, j))
-
+                if grid[i][j] == 0:
+                    h.appendleft((obstacles, i, j))
+                else:
+                    h.append((obstacles+1, i, j))
+                visited[i][j] = True
 
         # print('dp: ',dp)
-        return dp[m-1][n-1]
+        return -2
         
