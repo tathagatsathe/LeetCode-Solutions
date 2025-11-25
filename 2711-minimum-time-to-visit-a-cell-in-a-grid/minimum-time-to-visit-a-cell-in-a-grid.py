@@ -23,7 +23,7 @@ class Solution:
                 return grid[i][j]
             visited[i][j] = True
             for x, y in directions:
-                if 0<=x+i<m and 0<=y+j<n:
+                if 0<=x+i<m and 0<=y+j<n and visited[x+i][y+j]==False:
                     if grid[x+i][y+j]<=time+1:
                         heapq.heappush(h, (time+1,x+i,y+j))
                     else:
