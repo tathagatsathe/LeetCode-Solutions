@@ -1,4 +1,4 @@
-import heapq
+from collections import deque
 
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
@@ -7,23 +7,16 @@ class Solution:
         for flight in flights:
             graph[flight[0]].append((flight[1],flight[2]))
 
-        # print('graph: ',graph)
-        dp = [[float("inf")]*(k+2) for _ in range(n+1)]
-        h = []
-        heapq.heappush(h, (0, k+1, src))
-        while h:
-            cost, stops, node = heapq.heappop(h)
-
-            if dp[node][stops]!=float("inf"):
-                continue
-            if node == dst:
-                return cost
-            dp[node][stops] = cost
-            if stops <= 0:
-                continue
-
-            for nei, c in graph[node]:
-                heapq.heappush(h, (c+cost, stops-1, nei))
+        queue = deque([(src, 0)])
+        dp = [float("inf")]*n
+        dp[src] = 0
+        for i in range(k+1):
+            for _ in range(len(queue)):
+                node, curr_cost = queue.popleft()
+                for j, nxt_cost in graph[node]:
+                    if dp[j] > nxt_cost + curr_cost:
+                        dp[j] = nxt_cost + curr_cost
+                        queue.append((j, nxt_cost + curr_cost))
 
 
-        return -1
+        return dp[dst] if dp[dst]!=float("inf") else -1
