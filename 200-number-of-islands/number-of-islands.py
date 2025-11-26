@@ -1,24 +1,38 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        m = len(grid)
-        n = len(grid[0])
-        ans = 0
-        directions = [[-1,0],[1,0],[0,-1],[0,1]]
+        m, n = len(grid), len(grid[0])
+        parent = [[] for _ in range(m)]
+        for i in range(m):
+            for j in range(n):
+                parent[i].append((i,j))
 
-        def dfs(i,j):
-            if i<0 or j<0 or i>m-1 or j>n-1 or grid[i][j]=="0":
-                return 
+        def find(a):
+            if parent[a[0]][a[1]] != (a[0], a[1]):
+                parent[a[0]][a[1]] = find(parent[a[0]][a[1]])
 
-            grid[i][j] = "0"
-            for d in directions:
-                dfs(i+d[0],j+d[1])
+            return parent[a[0]][a[1]]
+
+        def union(a, b):
+            if grid[a[0]][a[1]] == "0" or grid[b[0]][b[1]] == "0":
+                return False
+            rootA = find(a)
+            rootB = find(b)
+            if rootA!=rootB:
+                parent[rootB[0]][rootB[1]] = rootA
+
 
         for i in range(m):
             for j in range(n):
-                if grid[i][j] == "1":
-                    dfs(i,j)
-                    ans+=1
+                if i+1<m:
+                    union((i,j),(i+1,j))
+                if j+1<n:
+                    union((i,j),(i,j+1))
 
-        return ans
+        parent_set = set()
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j]=="1" and parent[i][j] not in parent_set:
+                    parent_set.add(find((i,j)))
 
+        return len(parent_set)
 
