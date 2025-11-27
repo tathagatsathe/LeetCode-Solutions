@@ -6,7 +6,6 @@ class Solution:
             indegrees[b]+=1
             adj[a].append(b)
 
-        # print(indegrees)
         for i in range(1,n+1):
             if indegrees[i] == n-1 and adj[i]==[]:
                 return i
