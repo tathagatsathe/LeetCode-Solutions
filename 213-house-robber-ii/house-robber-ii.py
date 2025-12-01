@@ -4,15 +4,22 @@ class Solution:
         if n == 1:
             return nums[0]
 
-        dp = [[None]*(n+2) for _ in range(2)]
+        if n == 2:
+            return max(nums)
 
-        # print(dp)
-        def fn(nums, i, k):
-            if dp[k][i]!=None:
-                return dp[k][i]
-            if nums[i:]==[]:
-                return 0
-            dp[k][i] = max(nums[i] + fn(nums, i+2, k), fn(nums, i+1, k))
-            return dp[k][i]
 
-        return max(fn(nums[:-1], 0, 0), fn(nums[1:], 0, 1))
+        prev1 = max(nums[:2])
+        prev2 = nums[0]
+        for i in range(2, n-1):
+            curr1 = max(nums[i]+prev2, prev1)
+            prev2, prev1 = prev1, curr1
+
+        temp1 = prev1
+        
+        prev1 = max(nums[1:3])
+        prev2 = nums[1]
+        for i in range(3, n):
+            curr2 = max(nums[i]+prev2, prev1)
+            prev2, prev1 = prev1, curr2
+
+        return max(prev1, temp1)
