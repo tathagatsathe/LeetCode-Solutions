@@ -1,38 +1,26 @@
-import copy
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
         m = len(obstacleGrid)
         n = len(obstacleGrid[0])
-        visited = [[0]*n for _ in range(m)]
-
-        if (obstacleGrid[m-1][n-1] or obstacleGrid[0][0]):
+        if obstacleGrid[0][0] == 1 or obstacleGrid[m-1][n-1] == 1:
             return 0
+        dp = [[0]*n for _ in range(m)]
+        temp = 1
+        for i in range(m):
+            if obstacleGrid[i][0] == 1:
+                temp = 0
+            dp[i][0] = temp
+        temp = 1
+        for i in range(n):
+            if obstacleGrid[0][i] == 1:
+                temp = 0
+            dp[0][i] = temp
 
-        visited[m-1][n-1] = 1
-        
-        def adjCells(obstacleGrid, i, j, visited):
-            v = [(1,0),(0,1)]
-            cells = []
-            for (x, y) in v:
-                if((i+x>=0 and j+y>=0 and i+x<len(obstacleGrid) and j+y<len(obstacleGrid[0]) and obstacleGrid[i+x][j+y]==0)):
-                    cells.append((i+x, j+y))
+        for i in range(1, m):
+            for j in range(1, n):
+                if obstacleGrid[i][j] == 0:
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1]
 
-            return cells
 
-        def uniquePath(obstacleGrid, i, j, visited, m, n):
-            if(visited[i][j]):
-                return visited[i][j]
-
-            cells = adjCells(obstacleGrid, i, j, visited)
-
-            ans = 0
-            for (x,y) in cells:
-                ans+=uniquePath(obstacleGrid, x, y, visited, m, n)
-
-            visited[i][j] = ans
-
-            return visited[i][j]
-
-        return uniquePath(obstacleGrid, 0, 0, visited, m, n)
-
-            
+        return dp[m-1][n-1]
+                
