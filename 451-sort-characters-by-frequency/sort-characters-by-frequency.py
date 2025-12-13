@@ -2,15 +2,14 @@ import heapq
 
 class Solution:
     def frequencySort(self, s: str) -> str:
-        mp = {}
-        for i in s:
-            if i not in mp:
-                mp[i] = 0
-            mp[i]+=1
-
         h = []
-        for k in mp:
-            heapq.heappush(h, [-mp[k],k])
+        dp = [0]*(ord('z') - ord('0') + 1)
+        for i in s:
+            dp[ord(i)-ord('0')]+=1
+
+        for i in range(len(dp)):
+            if dp[i]!=0:
+                heapq.heappush(h, [-dp[i], chr(i+ord('0'))])
 
         ans = ""
         while h:
