@@ -17,10 +17,10 @@ class Solution:
 
             temp1 = mds(i+1, j) + ord(s1[i])
             temp2 = mds(i, j+1) + ord(s2[j])
-            temp3 = mds(i+1, j+1)
+            temp3 = float("inf")
 
-            if s1[i] != s2[j]:
-                temp3+=ord(s1[i]) + ord(s2[j])
+            if s1[i] == s2[j]:
+                temp3 = mds(i+1, j+1)
 
             dp[i][j] = min(temp1, min(temp2, temp3))
             return dp[i][j]
