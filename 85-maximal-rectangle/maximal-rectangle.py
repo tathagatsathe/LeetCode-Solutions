@@ -16,12 +16,10 @@ class Solution:
                     ans = temp
             else:
                 temp = 0
-            
         
         for i in range(1,m):
             stack = deque([])
             for j in range(n+1):
-                # print(i, j, 'stack: ',stack)
                 if dp[i][j] == 1:
                     dp[i][j] = dp[i-1][j] + 1
                 t = j
@@ -34,34 +32,4 @@ class Solution:
                 if dp[i][j] > 0:
                     stack.append([dp[i][j],t])
 
-                # print('ans: ',ans ,' i: ',i, ' j: ',j)
-
-
-        # print('dp: ',dp)
         return ans
-
-
-    # h:  
-    #     [0, 0, 1, 0], 
-    #     [0, 0, 1, 0], 
-    #     [0, 0, 1, 0],
-    #     [0, 0, 1, 2],
-    #     [0, 1, 2, 3],
-    #     [0, 1, 2, 3],
-    #     [1, 2, 3, 4]
-
-    # v:  [0, 0, 1, 0],
-    #     [0, 0, 2, 0],
-    #     [0, 0, 3, 0],
-    #     [0, 0, 4, 1],
-    #     [0, 1, 5, 2],
-    #     [0, 2, 6, 3],
-    #     [1, 3, 7, 4]
-
-    # dp: [0, 0, 1, 0]
-    #     [0, 0, 2, 0]
-    #     [0, 0, 3, 0]
-    #     [0, 0, 4, 2]
-    #     [0, 1, 5, 4]
-    #     [0, 2, 4, 9]
-    #     [1, 3, 6, 12]
