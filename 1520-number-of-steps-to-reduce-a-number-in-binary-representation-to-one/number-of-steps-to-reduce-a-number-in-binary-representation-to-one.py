@@ -2,31 +2,23 @@ class Solution:
     def numSteps(self, s: str) -> int:
         ans = 0
 
-        def addOne(b):
-            res = ""
-            carry = "1"
-            n = len(b)
-
-            for i in range(n-1,-1,-1):
-                if s[i] == "1" and carry == "1":
-                    res = "0" + res
-                else:
-                    if s[i] == "1" or carry == "1":
-                        res = "1" + res
-                    else:
-                        res = "0" + res
-                    carry = "0"
-
-            if carry == "1":
-                res = "1" + res
+        def binaryToDecimal(s):
+            res = 0
+            n = len(s)
+            for i in range(n):
+                res+=int(s[i])*2**(n-i-1)
 
             return res
 
-        while s != "1":
-            if s[-1] == "1":
-                s = addOne(s)
+        n = binaryToDecimal(s)
+
+
+        while n!=1:
+            if n%2:
+                n+=1
             else:
-                s = s[:-1]
+                n//=2
+
             ans+=1
 
         return ans
