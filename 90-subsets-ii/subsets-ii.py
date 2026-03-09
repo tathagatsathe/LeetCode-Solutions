@@ -2,6 +2,7 @@ class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         ans = []
         n = len(nums)
+        nums.sort()
 
         def fn(nums):
             ans = []
@@ -28,7 +29,8 @@ class Solution:
         ans = []
 
         for i in temp:
-            t = sorted(i)
+            # t = sorted(i)
+            t = i
             if t not in ans:
                 ans.append(t)
         
