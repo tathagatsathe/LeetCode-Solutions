@@ -11,9 +11,5 @@ class Solution:
                     s2[i+2] = s2[i]
                     s2[i] = temp
                     dont_move.add(i+2)
-
-        # print(s1)
-        # print(s2)
-        # print(dont_move)
                 
         return s1 == s2
