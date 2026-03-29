@@ -4,9 +4,9 @@ class Solution:
         s2 = list(s2)
         dont_move = set()
         
-        for i in range(4):
+        for i in range(2):
             if s1[i] != s2[i]:
-                if i < 2 and s2[i+2] == s1[i] and i not in dont_move:
+                if s2[i+2] == s1[i] and i not in dont_move:
                     temp = s2[i+2]
                     s2[i+2] = s2[i]
                     s2[i] = temp
