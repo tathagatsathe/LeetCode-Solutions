@@ -4,13 +4,10 @@ class Solution:
         n = len(nums)
         q = len(queries)
 
-        for i in range(q):
-            l, r, k, v = queries[i]
+        for l, r, k, v in queries:
             idx = l
-            while idx <= r:
+            for idx in range(l, r+1, k):
                 nums[idx] = (nums[idx] * v) % mod
-                idx+=k
-
 
         ans = 0
         for i in range(n):
