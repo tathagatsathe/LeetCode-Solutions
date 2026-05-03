@@ -7,7 +7,7 @@ class Solution {
             for (int i = 0; i<goalLength; i++) {
                 if (goal.charAt(i) == s.charAt(0)) {
                     int j = 0;
-                    while (j < n && (i+j)%goalLength < goalLength) {
+                    while (j < n) {
                         if (goal.charAt((i+j)%goalLength) != s.charAt(j)) {
                             break;
                         }
