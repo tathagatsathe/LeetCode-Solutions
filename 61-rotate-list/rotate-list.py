@@ -12,22 +12,16 @@ class Solution:
             n+=1
         
         if n == 0: return head
-        # 
-        if k >= n: k = k%n
-
+        
+        k = k%n
         if k == 0:
             return head
-
-        # print(n, k%n)
 
         node = head
         count = 0
         while count < n - k - 1:
             node = node.next
             count+=1
-
-        
-        # print(count, node)
 
         temp = node.next
         node.next = None
