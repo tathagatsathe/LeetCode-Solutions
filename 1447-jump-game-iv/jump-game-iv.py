@@ -13,11 +13,8 @@ class Solution:
                 map_[val] = []
             map_[val].append(i)
 
-        # print('n: ',n)
         i = 0
         while dq:
-            # print(dq, ans)
-            q = set()
             for _ in range(len(dq)):
                 i = dq.popleft()
                 if i == n-1:
@@ -25,7 +22,6 @@ class Solution:
 
                 if visited[i]:
                     continue
-                
                 visited[i] = True
                 
                 if i - 1 >= 0 and visited[i-1] == False:
@@ -41,13 +37,9 @@ class Solution:
                         dq.append(idx)
                 v[arr[i]] = True
 
-
             if i == n-1:
                 break
             ans+=1
-
-        # print('dq: ',dq, ' i: ',i)
-            
 
         return ans
 
