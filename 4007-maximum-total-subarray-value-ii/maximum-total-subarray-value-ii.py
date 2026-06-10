@@ -17,9 +17,7 @@ class SparseTableRMQ:
         for j in range(1, self.K):
             for i in range(self.n - (1 << j) + 1):
                 # Take minimum of two halves
-                left = self.st[i][j - 1]
-                right = self.st[i + (1 << (j - 1))][j - 1]
-                self.st[i][j] = min(left, right)
+                self.st[i][j] = min(self.st[i][j - 1], self.st[i + (1 << (j - 1))][j - 1])
                 self.st1[i][j] = max(self.st1[i][j - 1], self.st1[i + (1 << (j - 1))][j - 1])
 
     def query(self, L, R):
