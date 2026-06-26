@@ -1,9 +1,8 @@
-from sortedcontainers import SortedList
 class Solution:
     def countMajoritySubarrays(self, nums: List[int], target: int) -> int:
         ans = 0
         n = len(nums)
-        
+
         pref = [0]*(2*n+1)
         pref[n] = 1
         pref_sum = 0
