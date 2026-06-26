@@ -3,19 +3,20 @@ class Solution:
     def countMajoritySubarrays(self, nums: List[int], target: int) -> int:
         ans = 0
         n = len(nums)
-        pref = [0]*(n+1)
-        count = 0
         
-        for i in range(1,n+1):
-            temp = -1
-            if nums[i-1] == target:
-                temp=1
-            pref[i] = pref[i-1] + temp
+        pref = [0]*(2*n+1)
+        pref[n] = 1
+        pref_sum = 0
+        idx = n
 
-        sl = SortedList()
-        
-        for val in pref:
-            ans += sl.bisect_left(val)
-            sl.add(val)
+        for num in nums:
+            if num == target:
+                pref_sum+=pref[idx]
+                idx+=1
+            else:
+                idx-=1
+                pref_sum-=pref[idx]
+            pref[idx]+=1
+            ans+=pref_sum
 
         return ans
