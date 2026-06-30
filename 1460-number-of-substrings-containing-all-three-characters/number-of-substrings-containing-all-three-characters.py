@@ -16,16 +16,13 @@ class Solution:
             return True
 
         while start < n :
-            if checkAllchars(map_):
-                ans+= n - end
+            if checkAllchars(map_) == False and end < n-1:
+                end+=1
+                map_[ord(s[end]) - ord('a')]+=1
+            else:
+                if checkAllchars(map_):
+                    ans+= n - end
                 map_[ord(s[start]) - ord('a')]-=1
                 start+=1
-            else:
-                if end < n - 1:
-                    end+=1
-                    map_[ord(s[end]) - ord('a')]+=1
-                else:
-                    map_[ord(s[start]) - ord('a')]-=1
-                    start+=1
 
         return ans
