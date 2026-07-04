@@ -1,37 +1,29 @@
-from bisect import bisect_left
-
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        ans = []
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+        n = len(nums)
         nums.sort()
 
-        for i in range(len(nums)):
-            if i>0 and nums[i] == nums[i-1]:
-                continue
-            j = i+1
-            k = len(nums)-1
-            while(j<k):
-                s = nums[i]+nums[j]+nums[k]
-                temp = [nums[i],nums[j],nums[k]]
-                if(s==0):
-                    ans.append(temp)
-                    j+=1
-                    k-=1
-                elif(s<0):
-                    j+=1
+        res = []
+
+        for i in range(n-2):
+            left = i+1
+            right = n - 1
+
+            while left < right:
+                sum_ = nums[i] + nums[left] + nums[right]
+                if sum_ == 0:
+                    res.append([nums[i], nums[left], nums[right]])
+                    left+=1
+                    right-=1
+                elif sum_ < 0:
+                    left+=1
                 else:
-                    k-=1
+                    right-=1
 
-        i = 1
-        ans.sort()
-        while(i<len(ans)):
-            if(ans[i-1]==ans[i]):
-                ans.pop(i)
-            else:
-                i+=1
-        
+        res.sort()
+        ans = []
+        for i in range(len(res)):
+            if ans == [] or ans[-1] != res[i]:
+                ans.append(res[i])
+
         return ans
-
-            
-        
-        
