@@ -1,25 +1,17 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
         ans = 0
-        m = height[0]
-        tr = 0
+        max_height = 0
+
         for h in height:
-            if(h<m):
-                tr += (m - h)
-            elif(h>=m):
-                ans+=tr
-                tr=0
-            m = max(h,m)
+            max_height = max(max_height, h)
+            ans+=max_height - h
 
-        tr = 0
-        m = height[-1]
+        mx_ht = 0
         for h in height[::-1]:
-            if(h<m):
-                tr += (m - h)
-            elif(h>m):
-                ans+=tr
-                tr=0
-            m = max(h,m)
-
+            mx_ht = max(mx_ht, h)
+            if max_height == h:
+                break
+            ans = ans - (max_height - h) + (mx_ht - h)
 
         return ans
