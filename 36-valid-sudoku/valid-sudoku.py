@@ -1,43 +1,19 @@
 class Solution:
-    def isValidSudoku(self, board: List[List[str]]) -> bool:
-        for i in range(len(board)):
-            v = [0]*10
-            for j in range(len(board[0])):
-                val = 0 if board[i][j]=="." else int(board[i][j])
-                if(val!=0 and v[val]!=0):
-                    return False
-                v[val]+=1
+    def isValidSudoku(self, board: List[List[str]]) -> bool:        
+        small_grid_nos = [[[0]*10 for _ in range(3)] for _ in range(3)]        
 
-        for i in range(len(board)):
-            v = [0]*10
-            for j in range(len(board[0])):
-                val = 0 if board[j][i]=="." else int(board[j][i])
-                if(val!=0 and v[val]!=0):
-                    return False
-                v[val]+=1
-
-
-        v = 0
-        vl = 3
-        h = 0
-        hl = 3
-
-        while(v<9):
-            d = [0]*10
-            for i in range(v, vl):
-                for j in range(h, hl):
-                    val = 0 if board[i][j]=="." else int(board[i][j])
-                    if(val!=0 and d[val]!=0):
+        for i in range(9):
+            h_numbers_found = [0]*10
+            v_numbers_found = [0]*10
+            for j in range(9):
+                if board[i][j] != ".":
+                    if h_numbers_found[int(board[i][j])] != 0 or small_grid_nos[i//3][j//3][int(board[i][j])] != 0:
                         return False
-                    d[val]+=1
-            if(hl==9):
-                h = 0
-                hl = 3
-                v+= 3
-                vl+=3
-            else:
-                h+=3
-                hl+=3
+                    h_numbers_found[int(board[i][j])]+= 1
+                    small_grid_nos[i//3][j//3][int(board[i][j])]+= 1
+                if board[j][i] != ".":
+                    if v_numbers_found[int(board[j][i])] != 0:
+                        return False
+                    v_numbers_found[int(board[j][i])]+= 1
 
         return True
-
