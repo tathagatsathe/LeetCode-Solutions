@@ -11,11 +11,9 @@ class Solution:
             """Converts a binary tree into a string expression."""
             if not root:
                 return "#"
-            return f"{root.val},{serialize(root.left)},{serialize(root.right)}"
+            return f",{root.val},{serialize(root.left)},{serialize(root.right)}"
 
-        if serialize(root) == serialize(subRoot):
-            return True
-        if root == None:
-            return False
+        root = serialize(root)
+        subRoot = serialize(subRoot)
 
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        return subRoot in root
