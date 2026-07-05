@@ -9,31 +9,24 @@ class Solution:
                 return [[]]
 
             if target < 0 or idx >= n or candidates[idx] > target:
-                return False
+                return []
 
             if dp[target][idx]!=False:
                 return dp[target][idx]
 
             res = []
-            for i in range(idx, n):
-                temp = fn(i+1, target - candidates[i])
-                # print('i: ',i, ' temp: ',temp, ' target: ', target - candidates[i])
-                if temp != False:
-                    for t in temp:
-                        if [candidates[i]] + t not in res:
-                            res.append([candidates[i]] + t)
+            arr1 = fn(idx+1, target - candidates[idx])
+            arr2 = fn(idx+1, target)
 
-            # print('candidates: ',candidates, ' target: ',target)
-            # print('res: ', res)
-            # print('__________________________________________________')
+            res.extend(arr2)
+            for arr in arr1:
+                if [candidates[idx]] + arr not in res:
+                    res.append([candidates[idx]] + arr)
+
             dp[target][idx] = res
 
             return res
 
-        # print('candidates: ',candidates)
         res = fn(0, target)
-        # res.sort()
-        if res == False:
-            res = []
 
         return res
