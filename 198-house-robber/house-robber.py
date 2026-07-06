@@ -1,15 +1,15 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        dp = [None]*(len(nums)+2)
-        def robbed(nums, i):
-            if dp[i]!=None:
-                return dp[i]
-            if nums[i:] == []:
-                dp[i] = 0
-                return 0
+        n = len(nums)
+        
+        if n < 2:
+            return max(nums)
 
-            dp[i] = max(nums[i] + robbed(nums,i+2), robbed(nums, i+1))
-            return dp[i]
+        prev2, prev1 = nums[0], nums[1]
 
-        return robbed(nums, 0)
+        for i in range(2, n):
+            curr = max(prev2 + nums[i], prev1)
+            prev2, prev1 = max(prev1, prev2), curr
+
+        return max(prev1, prev2)
         
