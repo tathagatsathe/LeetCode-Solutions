@@ -15,6 +15,6 @@ class Solution:
         for i in range(1, 10):
             fn(i)
 
-        ans.sort(key = lambda x: (len(str(x)), x))
+        ans.sort()
         
         return ans
