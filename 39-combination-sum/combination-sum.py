@@ -3,25 +3,24 @@ class Solution:
         n = len(candidates)
         candidates.sort()
 
-        def fn(i, target):
+        ans = []
+
+        def fn(i, target, arr):
+            nonlocal ans
             if target == 0:
-                return [[]]
+                ans.append(arr)
+                return
 
             if target < 0 or i >= n or candidates[i] > target:
-                return []
+                return 
 
             res = []
-            arr1 = fn(i, target - candidates[i])
-            arr2 = fn(i+1, target)
+            fn(i, target - candidates[i], arr + [candidates[i]])
+            fn(i+1, target, arr)
+            return 
 
-            if arr1 != []:
-                res.extend([[candidates[i]] + a for a in arr1])
-            if arr2 != []:
-                res.extend(arr2)
 
-            return res
-
-        ans = fn(0, target)
+        fn(0, target, [])
 
         return ans
 
