@@ -1,10 +1,13 @@
 class Solution:
     def targetIndices(self, nums: list[int], target: int) -> list[int]:
         ans = []
-        nums.sort()
+        targetCount = 0
+        lessThanTargetCount = 0
 
         for i, val in enumerate(nums):
+            if val < target:
+                lessThanTargetCount+=1
             if val == target:
-                ans.append(i)
+                targetCount+=1
 
-        return ans
+        return list(range(lessThanTargetCount, lessThanTargetCount + targetCount))
