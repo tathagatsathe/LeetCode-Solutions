@@ -3,15 +3,11 @@ class Solution:
         len_q = len(queries)
         len_l = len(logs)
         arr = [0]*len_q
-        # print(arr)
-        
+
         queries = [(i, q) for i, q in enumerate(queries)]
         queries.sort(key = lambda x: x[1])
         logs.sort(key = lambda x: x[1])
 
-        # print(queries)
-        # print(logs)
-        # print('\n\n')
         logs_idx = 0
         q_idx = 0
         res = 0
@@ -38,8 +34,6 @@ class Solution:
                 d[logs[right][0]]+=1
                 right+=1
 
-            # print(q_idx, d, [left, right])
-            # print('______________________________')
             arr[queries[q_idx][0]] = n - len(d)
             q_idx+=1
 
